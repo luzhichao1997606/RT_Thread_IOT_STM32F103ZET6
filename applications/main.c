@@ -73,7 +73,7 @@ static void led1_thread_entry(void *paremeter)
 
 /**
  * @name: main
- * @brief: 主函数
+ * @brief: 主函数，创建线程
  * @author: lzc
  * @param {type} None
  * @return {type} None
