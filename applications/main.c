@@ -83,12 +83,14 @@ int main(void)
 {
     board_Init();
     /****************创建动态线程函数************/
+    //LED 1 线程
     led1_task = rt_thread_create("led1",       /*线程名字*/
                                  led1_thread_entry,/*线程入口函数*/
                                  RT_NULL,/*线程入口函数参数*/
                                  512,    /*线程栈大小*/
                                  3,     /*线程优先级*/
                                  20);   /*线程时间片*/
+    //LED 0线程
     led0_task = rt_thread_create("led0",      /*线程名字*/
                                  led0_thread_entry,/*线程入口函数*/
                                  RT_NULL,/*线程入口函数参数*/
