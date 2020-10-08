@@ -45,10 +45,12 @@ static void led0_thread_entry(void *paremeter)
 {
     while (1)
     {
+        rt_kprintf("led0 task start!\r\n");
         rt_pin_write(LED0_PIN, PIN_HIGH);
         rt_thread_mdelay(1500);
         rt_pin_write(LED0_PIN, PIN_LOW);
         rt_thread_mdelay(1500);
+        rt_kprintf("led0 task stop!\r\n");
     }
 }
 
@@ -64,10 +66,12 @@ static void led1_thread_entry(void *paremeter)
 {
     while (1)
     {
+        rt_kprintf("led1 task start!\r\n");
         rt_pin_write(LED1_PIN, PIN_HIGH);
         rt_thread_mdelay(1500);
         rt_pin_write(LED1_PIN, PIN_LOW);
         rt_thread_mdelay(500);
+        rt_kprintf("led1 task stop!\r\n");
     }
 }
 
