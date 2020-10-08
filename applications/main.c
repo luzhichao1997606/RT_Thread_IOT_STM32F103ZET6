@@ -7,7 +7,7 @@
  * Date           Author       Notes
  * 2018-11-5      SummerGift   first version
  */
- 
+
 #include <rtthread.h>
 #include <rtdevice.h>
 #include <board.h>
@@ -26,9 +26,9 @@ static rt_thread_t led1_task = RT_NULL;
  * @return {type} None
  * @note: 修改记录：初次创建
  */
-void board_Init (void)
-{ 
-     /* set LED0 pin mode to output */
+void board_Init(void)
+{
+    /* set LED0 pin mode to output */
     rt_pin_mode(LED0_PIN, PIN_MODE_OUTPUT);
     rt_pin_mode(LED1_PIN, PIN_MODE_OUTPUT);
 }
@@ -41,16 +41,15 @@ void board_Init (void)
  * @return {type} None
  * @note: 修改记录：初次创建
  */
-static void led0_thread_entry(void* paremeter)
+static void led0_thread_entry(void *paremeter)
 {
-    
-    while(1)
+    while (1)
     {
         rt_pin_write(LED0_PIN, PIN_HIGH);
         rt_thread_mdelay(1500);
         rt_pin_write(LED0_PIN, PIN_LOW);
-        rt_thread_mdelay(1500);   
-    } 
+        rt_thread_mdelay(1500);
+    }
 }
 
 /**
@@ -61,20 +60,19 @@ static void led0_thread_entry(void* paremeter)
  * @return {type} None
  * @note: 修改记录：初次创建
  */
-static void led1_thread_entry(void* paremeter)
+static void led1_thread_entry(void *paremeter)
 {
-    
-    while(1)
+    while (1)
     {
         rt_pin_write(LED1_PIN, PIN_HIGH);
         rt_thread_mdelay(1500);
         rt_pin_write(LED1_PIN, PIN_LOW);
-        rt_thread_mdelay(500);   
-    } 
+        rt_thread_mdelay(500);
+    }
 }
 
 /**
- * @name: main  
+ * @name: main
  * @brief: 主函数
  * @author: lzc
  * @param {type} None
@@ -82,22 +80,21 @@ static void led1_thread_entry(void* paremeter)
  * @note: 修改记录：初次创建
  */
 int main(void)
-{ 
-	board_Init();
+{
+    board_Init();
     /****************创建动态线程函数************/
-    led1_task = rt_thread_create( "led1",     /*线程名字*/                    
-                                    led1_thread_entry,/*线程入口函数*/
-                                    RT_NULL,/*线程入口函数参数*/
-                                    512,    /*线程栈大小*/
-                                    3 ,    /*线程优先级*/
-                                    20);   /*线程时间片*/ 
-
-    led0_task = rt_thread_create( "led0",     /*线程名字*/                    
-                                    led0_thread_entry,/*线程入口函数*/
-                                    RT_NULL,/*线程入口函数参数*/
-                                    512,    /*线程栈大小*/
-                                    3 ,    /*线程优先级*/
-                                    20);   /*线程时间片*/               
-    rt_thread_startup (led1_task);
-    rt_thread_startup (led0_task);
+    led1_task = rt_thread_create("led1",       /*线程名字*/
+                                 led1_thread_entry,/*线程入口函数*/
+                                 RT_NULL,/*线程入口函数参数*/
+                                 512,    /*线程栈大小*/
+                                 3,     /*线程优先级*/
+                                 20);   /*线程时间片*/
+    led0_task = rt_thread_create("led0",      /*线程名字*/
+                                 led0_thread_entry,/*线程入口函数*/
+                                 RT_NULL,/*线程入口函数参数*/
+                                 512,    /*线程栈大小*/
+                                 3,     /*线程优先级*/
+                                 20);   /*线程时间片*/
+    rt_thread_startup(led1_task);
+    rt_thread_startup(led0_task);
 }
